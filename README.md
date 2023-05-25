@@ -1,5 +1,12 @@
-# 🦜️🔗 ChatLangChain
+# 🦜️🔗 ChatLangChain with Zep Memory
 
+**This repo is a clone of [ChatLangChain](https://github.com/hwchase17/chat-langchain) with the addition of [Zep Memory](https://github.com/getzep/zep) and updated to use Langchain's `ConversationalRetrievalChain`**
+
+---
+# IMPORTANT
+Note: FastAPI runs an asyncio event loop. So do the Zep sync APIs (as they wrap our async APIs). As a result, you *must* install and initialize `nest_asyncio`. This is done in `query_data.py`. The requirements.txt file includes this dependency.
+
+---
 This repo is an implementation of a locally hosted chatbot specifically focused on question answering over the [LangChain documentation](https://langchain.readthedocs.io/en/latest/).
 Built with [LangChain](https://github.com/hwchase17/langchain/) and [FastAPI](https://fastapi.tiangolo.com/).
 
