@@ -8,6 +8,11 @@ from langchain.chains.llm import LLMChain
 from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 from langchain.vectorstores.base import VectorStore
+from langchain.memory.chat_message_histories import ZepChatMessageHistory
+from langchain.memory import ConversationBufferMemory
+import nest_asyncio
+
+nest_asyncio.apply()
 
 
 def get_chain(
@@ -19,6 +24,11 @@ def get_chain(
     manager = AsyncCallbackManager([])
     question_manager = AsyncCallbackManager([question_handler])
     stream_manager = AsyncCallbackManager([stream_handler])
+    zep = ZepChatMessageHistory(
+        session_id="test1",
+        url="http://localhost:8000",
+    )
+    memory = ConversationBufferMemory(memory_key="chat_history", chat_memory=zep, return_messages=True)
     if tracing:
         tracer = LangChainTracer()
         tracer.load_default_session()
@@ -50,5 +60,6 @@ def get_chain(
         combine_docs_chain=doc_chain,
         question_generator=question_generator,
         callback_manager=manager,
+        memory=memory,
     )
     return qa
