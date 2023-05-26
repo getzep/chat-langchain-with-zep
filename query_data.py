@@ -10,9 +10,6 @@ from langchain.llms import OpenAI
 from langchain.vectorstores.base import VectorStore
 from langchain.memory.chat_message_histories import ZepChatMessageHistory
 from langchain.memory import ConversationBufferMemory
-import nest_asyncio
-
-nest_asyncio.apply()
 
 
 def get_chain(
